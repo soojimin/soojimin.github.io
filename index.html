@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>민수지 | Attorney at Law — CV</title>
+<style>
+  :root {
+    --ink: #2b2a33;
+    --ink-soft: #6f6d78;
+    --paper: #fbfaf7;
+    --paper-tint: #f3efe9;
+    --accent: #d9684f;
+    --accent-deep: #b8503a;
+    --accent-soft: rgba(217, 104, 79, 0.13);
+    --line: #e8e2d9;
+    --card: #ffffff;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard",
+                 "Malgun Gothic", "Noto Sans KR", "Segoe UI", Roboto, sans-serif;
+    color: var(--ink);
+    background: var(--paper);
+    line-height: 1.7;
+    letter-spacing: -0.01em;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  .lang-content { display: none; }
+  .lang-content.active { display: block; }
+
+  /* ---------- language toggle ---------- */
+  .lang-toggle-wrap {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 100;
+  }
+  .lang-toggle-btn {
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 8px 18px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--card);
+    color: var(--ink);
+    cursor: pointer;
+    box-shadow: 0 2px 14px rgba(43, 42, 51, 0.08);
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  }
+  .lang-toggle-btn:hover {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  /* ---------- page shell ---------- */
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 86px 28px 72px;
+  }
+
+  /* ---------- hero / header ---------- */
+  .hero {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    margin-bottom: 56px;
+  }
+  .hero-photo {
+    flex: none;
+    width: 92px;
+    aspect-ratio: 425 / 567;
+    border-radius: 10px;
+    overflow: hidden;
+    background: var(--paper-tint);
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  .hero-text { flex: 1; min-width: 0; }
+  .eyebrow {
+    margin: 0 0 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+  }
+  .hero-name {
+    margin: 0 0 4px;
+    font-size: 32px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+  .hero-name .sub {
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    color: var(--ink-soft);
+    margin-left: 10px;
+  }
+  .hero-role {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--accent-deep);
+  }
+
+  /* ---------- meta list (contact / bar / languages) — plain rows, no boxes ---------- */
+  .meta-list {
+    margin: 0 0 56px;
+    padding: 4px 0;
+    border-top: 1px solid var(--line);
+  }
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 22px;
+    padding: 11px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .meta-label {
+    flex: none;
+    width: 84px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-deep);
+  }
+  .meta-value {
+    flex: 1;
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+  .meta-value a { color: var(--ink); text-decoration: none; border-bottom: 1px solid var(--accent-soft); }
+  .meta-value a:hover { color: var(--accent-deep); border-color: var(--accent-deep); }
+
+  /* ---------- sections ---------- */
+  .section { margin-bottom: 52px; }
+  .section-title {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 0 0 22px;
+    font-size: 19px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+  .section-title::before {
+    content: "";
+    display: inline-block;
+    width: 22px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--accent);
+    transform: translateY(-4px);
+  }
+
+  .about-text {
+    margin: 0;
+    font-size: 15px;
+    color: var(--ink);
+    max-width: 64ch;
+  }
+
+  /* ---------- education ---------- */
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    padding: 14px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .info-row:last-child { border-bottom: none; }
+  .info-main { font-size: 14.5px; font-weight: 700; color: var(--ink); }
+  .info-sub { font-size: 13px; color: var(--ink-soft); margin-top: 2px; }
+  .info-period {
+    flex: none;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- experience timeline ---------- */
+  .exp-entry {
+    position: relative;
+    padding-left: 26px;
+    border-left: 2px solid var(--line);
+    margin-bottom: 34px;
+  }
+  .exp-entry::before {
+    content: "";
+    position: absolute;
+    left: -7px;
+    top: 4px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--accent);
+    border: 3px solid var(--paper);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+  .exp-entry:last-child { margin-bottom: 0; }
+  .exp-head {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 6px 16px;
+    margin-bottom: 2px;
+  }
+  .exp-org { font-size: 15px; font-weight: 700; color: var(--ink); }
+  .exp-period {
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
+  .exp-role {
+    margin: 0 0 10px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent-deep);
+  }
+  .exp-list { margin: 0; padding-left: 18px; }
+  .exp-list li { font-size: 13.5px; color: var(--ink); margin-bottom: 7px; }
+  .exp-list li:last-child { margin-bottom: 0; }
+
+  /* ---------- practice areas (simplified tag-cards) ---------- */
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .practice-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 22px;
+    transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+  }
+  .practice-card:hover {
+    border-color: var(--accent-soft);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(43, 42, 51, 0.08);
+  }
+  .practice-card h3 {
+    margin: 0 0 6px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .practice-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--ink-soft);
+    line-height: 1.6;
+  }
+  .practice-card .tag-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-right: 8px;
+    vertical-align: middle;
+    transform: translateY(-1px);
+  }
+
+  /* ---------- footer ---------- */
+  .cv-footer {
+    margin-top: 68px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 640px) {
+    .page { padding: 74px 20px 56px; }
+    .hero { flex-direction: column; align-items: flex-start; gap: 18px; }
+    .hero-photo { width: 80px; }
+    .hero-name { font-size: 26px; }
+    .meta-row { flex-direction: column; gap: 2px; }
+    .meta-label { width: auto; }
+    .practice-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="lang-toggle-wrap">
+  <button id="langToggle" class="lang-toggle-btn" aria-label="Switch to English">EN</button>
+</div>
+
+<!-- ========================= KOREAN ========================= -->
+<div id="content-ko" class="lang-content">
+  <div class="page">
+
+    <header class="hero">
+      <div class="hero-photo">
+        <img src="profile.jpg" alt="민수지 프로필 사진" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="hero-text">
+        <p class="eyebrow">RESUME · CV</p>
+        <h1 class="hero-name">민수지<span class="sub">MIN, SOOJI</span></h1>
+        <p class="hero-role">변호사 · Attorney at Law</p>
+      </div>
+    </header>
+
+    <div class="meta-list">
+      <div class="meta-row"><span class="meta-label">Contact</span><span class="meta-value"><a href="mailto:sooji.min.us@gmail.com">sooji.min.us@gmail.com</a></span></div>
+      <div class="meta-row"><span class="meta-label">자격</span><span class="meta-value">대한민국 변호사 (제11회 변호사시험 합격)</span></div>
+      <div class="meta-row"><span class="meta-label">언어</span><span class="meta-value">한국어 (모국어), 영어 (영문 계약서 검토 및 법률문서 작성)</span></div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">소개</h2>
+      <p class="about-text">
+        서울대학교 법학전문대학원을 졸업하고 제11회 변호사시험에 합격했습니다. 공공기관과
+        법무법인을 두루 거치며 서로 다른 조직과 분야의 동료·기관과 함께 일해 왔고, 이 경험을 통해
+        새로운 환경에 빠르게 적응하고 다양한 입장을 조율하며 협업하는 역량을 길렀습니다.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">학력</h2>
+      <div class="info-row">
+        <div>
+          <div class="info-main">서울대학교 법학전문대학원 — 법학전문석사 (J.D.)</div>
+          <div class="info-sub">제11회 변호사시험 합격</div>
+        </div>
+        <div class="info-period">2016.03 – 2021.02</div>
+      </div>
+      <div class="info-row">
+        <div>
+          <div class="info-main">서울대학교 — 미학 전공 / 사회학 부전공 (학사)</div>
+        </div>
+        <div class="info-period">2010.03 – 2016.02</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">경력</h2>
+
+      <div class="exp-entry">
+        <div class="exp-head">
+          <span class="exp-org">법무법인 덕수 — 콘텐츠저작권팀 · 소상공인 용역팀</span>
+          <span class="exp-period">2024.04 – 2025.12</span>
+        </div>
+        <p class="exp-role">변호사</p>
+        <ul class="exp-list">
+          <li>웹툰·공연·해외 콘텐츠 공급계약(국문·영문) 검토 및 저작권 자문 수행 (한국만화가협회, 뮤지컬제작사협회, 케이엘큐브 등)</li>
+          <li>해외저작권 특정침해 실태조사 프로젝트 수행 — 12개국 28개 사례 분석, CDN·DNS·WHOIS·SSL 등 인터넷 인프라 기술을 직접 학습하여 법리 분석에 적용</li>
+          <li>생성형 AI 산출물의 저작권 귀속 등 신규 법률 쟁점 분석</li>
+          <li>공정거래법·가맹사업법·약관규제법·대규모유통업법을 중심으로 소상공인 법률상담 500건 이상 수행</li>
+          <li>가맹본부-가맹점 분쟁 및 플랫폼 입점 분쟁을 유형별로 정리·매뉴얼화하고, 공정거래위원회 신고 및 공정거래조정원 분쟁조정 절차를 직접 연계·지원</li>
+          <li>소상공인시장진흥공단과 협력해 가맹사업법 교육 동영상·책자를 기획·제작하고, 현장 수요를 반영한 운영지침 개정에 참여</li>
+          <li>손해배상, 국가배상, 임대차(권리금) 분쟁, 부당이득반환·사기 고소, 용역대금 청구 등 다양한 유형의 일반 민·형사 사건 대리 — 자세한 사건 유형은 &lsquo;전문 분야&rsquo;의 일반 민사·형사 항목 참조</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-head">
+          <span class="exp-org">법무법인 디엘에스 — 기업법무팀</span>
+          <span class="exp-period">2023.09 – 2024.02</span>
+        </div>
+        <p class="exp-role">변호사</p>
+        <ul class="exp-list">
+          <li>IT·핀테크·플랫폼 분야 계약 검토 및 기업법무 자문 수행 — 결제대행사(PG사)의 해외 플랫폼 결제대행계약, 앱스토어 사업자의 총판계약·기업결합신고, 전자인증기관의 소프트웨어 라이선스계약 등</li>
+          <li>전환사채 전환청구 등 투자·자본거래 관련 자문</li>
+          <li>자본시장법 위반(허위공시), 업무상배임, 의료기사법 위반 등 형사 고소 대리 및 행정소송(품목처분취소 취소소송) 수행 — 자세한 사건 유형은 &lsquo;전문 분야&rsquo;의 일반 민사·형사 항목 참조</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-head">
+          <span class="exp-org">서울사회복지공익법센터 (서울시복지재단)</span>
+          <span class="exp-period">2022.07 – 2023.07</span>
+        </div>
+        <p class="exp-role">변호사</p>
+        <ul class="exp-list">
+          <li>소송구조 제도를 활용한 민·형사 공익소송 직접 대리 및 정기·방문 법률상담 운영</li>
+          <li>서울시 조례 제·개정 초안 작성, 주거기본법 등 관련 법령에 대한 정책의견 제시, 서울시 정책위원회 위원 활동</li>
+          <li>서울시 공무원 대상 법률교육 세션 설계·진행 및 복지 분야 법률 이슈 토론회 기획·운영</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">전문 분야</h2>
+      <div class="practice-grid">
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>일반 민사·형사</h3>
+          <p>손해배상·임대차·부당이득·형사 고소 등 폭넓은 유형의 사건을 직접 대리</p>
+        </div>
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>기업법무 · 공정거래</h3>
+          <p>계약 검토·자문, 가맹사업·유통 분쟁 대응, 컴플라이언스·운영기준 정비</p>
+        </div>
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>IT · 핀테크</h3>
+          <p>플랫폼·결제·라이선스 계약 검토(국·영문) 및 투자·자본거래 자문</p>
+        </div>
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>지식재산권 · 콘텐츠</h3>
+          <p>콘텐츠 공급계약 검토, 저작권 자문, 해외 침해 실태조사 및 대응</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">AI · 기술 활용</h2>
+      <p class="about-text">
+        ChatGPT, Claude, 엘박스 AI 등 LLM 기반 법률 AI 도구를 실무에 적극 활용하고 있으며,
+        해외저작권 침해 실태조사 과정에서 CDN·DNS·WHOIS·SSL 등 인터넷 인프라 기술을 직접 학습해
+        법리 분석에 적용한 경험이 있습니다.
+      </p>
+    </section>
+
+    <footer class="cv-footer">
+      <span>민수지 (MIN, SOOJI) · sooji.min.us@gmail.com</span>
+      <span>최종 수정: 2026.06</span>
+    </footer>
+
+  </div>
+</div>
+
+<!-- ========================= ENGLISH ========================= -->
+<div id="content-en" class="lang-content">
+  <div class="page">
+
+    <header class="hero">
+      <div class="hero-photo">
+        <img src="profile.jpg" alt="Portrait of MIN, Sooji" onerror="this.parentElement.style.display='none'">
+      </div>
+      <div class="hero-text">
+        <p class="eyebrow">RESUME · CV</p>
+        <h1 class="hero-name">MIN, Sooji<span class="sub">민수지</span></h1>
+        <p class="hero-role">Attorney at Law</p>
+      </div>
+    </header>
+
+    <div class="meta-list">
+      <div class="meta-row"><span class="meta-label">Contact</span><span class="meta-value"><a href="mailto:sooji.min.us@gmail.com">sooji.min.us@gmail.com</a></span></div>
+      <div class="meta-row"><span class="meta-label">Bar Admission</span><span class="meta-value">Attorney at Law, Republic of Korea (11th Korean Bar Examination)</span></div>
+      <div class="meta-row"><span class="meta-label">Languages</span><span class="meta-value">Korean (native), English (contract review and legal drafting)</span></div>
+    </div>
+
+    <section class="section">
+      <h2 class="section-title">About</h2>
+      <p class="about-text">
+        Attorney admitted to the Korean Bar (11th Korean Bar Examination) after earning a J.D.
+        from Seoul National University School of Law. Having worked across public institutions
+        and law firms — alongside colleagues and institutions from very
+        different backgrounds — I have developed a strength for adapting quickly to new
+        environments and collaborating effectively across differing perspectives.
+      </p>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Education</h2>
+      <div class="info-row">
+        <div>
+          <div class="info-main">Seoul National University School of Law — Juris Doctor (J.D.)</div>
+          <div class="info-sub">Passed the 11th Korean Bar Examination</div>
+        </div>
+        <div class="info-period">Mar 2016 – Feb 2021</div>
+      </div>
+      <div class="info-row">
+        <div>
+          <div class="info-main">Seoul National University — B.A. in Aesthetics, Minor in Sociology</div>
+        </div>
+        <div class="info-period">Mar 2010 – Feb 2016</div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Experience</h2>
+
+      <div class="exp-entry">
+        <div class="exp-head">
+          <span class="exp-org">Duksoo Law Group — Content &amp; Copyright Team / Small Business Services Team</span>
+          <span class="exp-period">Apr 2024 – Dec 2025</span>
+        </div>
+        <p class="exp-role">Attorney at Law</p>
+        <ul class="exp-list">
+          <li>Reviewed webtoon, performance, and overseas content-supply agreements (Korean and English) and advised on copyright matters for organizations such as the Korea Cartoonists Association, the Korea Musical Theatre Producers Association, and KL CUBE</li>
+          <li>Conducted an overseas copyright-infringement survey project — analyzed 28 cases across 12 countries and learned internet-infrastructure technologies (CDN, DNS, WHOIS, SSL) to support the legal analysis</li>
+          <li>Analyzed emerging legal issues in generative AI, including copyright attribution of AI-generated works</li>
+          <li>Advised on 500+ legal consultations for small business owners under the Fair Trade Act, Franchise Business Act, Act on the Regulation of Terms and Conditions, and Large-Scale Distribution Business Act</li>
+          <li>Classified and documented recurring franchise and online-platform seller disputes; directly coordinated KFTC reports and mediation through the Korea Fair Trade Mediation Agency</li>
+          <li>Partnered with the Korea SMEs and Startups Agency to plan and produce franchise-law training videos and handbooks, and contributed to revising operational guidelines based on field needs</li>
+          <li>Represented clients in a wide range of general civil and criminal matters — damages claims, state compensation, lease disputes, unjust enrichment and fraud complaints, service-fee claims, and more (see "Practice Areas" — General Civil &amp; Criminal)</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-head">
+          <span class="exp-org">DLS Law Firm — Corporate Legal Team</span>
+          <span class="exp-period">Sep 2023 – Feb 2024</span>
+        </div>
+        <p class="exp-role">Attorney at Law</p>
+        <ul class="exp-list">
+          <li>Reviewed and advised on contracts in the IT, fintech, and platform sectors — including an overseas platform payment-processing agreement for a payment service provider, a distribution agreement and business-combination filing for an app-store operator, and a software license agreement for a certification authority</li>
+          <li>Advised on capital and investment matters, including convertible-bond conversion claims</li>
+          <li>Represented clients in criminal complaints (securities-law violation / false disclosure, breach of trust, violation of the Medical Technologists Act) and an administrative litigation matter (revocation of a product-disposition order) (see "Practice Areas" — General Civil &amp; Criminal)</li>
+        </ul>
+      </div>
+
+      <div class="exp-entry">
+        <div class="exp-head">
+          <span class="exp-org">Seoul Public Interest Law Center for Social Welfare (Seoul Welfare Foundation)</span>
+          <span class="exp-period">Jul 2022 – Jul 2023</span>
+        </div>
+        <p class="exp-role">Attorney at Law</p>
+        <ul class="exp-list">
+          <li>Directly represented clients in public-interest civil and criminal litigation through the legal-aid system, and ran regular and outreach legal-consultation programs</li>
+          <li>Drafted proposals to enact and amend Seoul municipal ordinances, presented policy opinions on housing-related legislation, and served as a member of a Seoul city policy committee</li>
+          <li>Designed and led legal-education sessions for Seoul city officials and organized public discussions on welfare-related legal issues</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">Practice Areas</h2>
+      <div class="practice-grid">
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>General Civil &amp; Criminal</h3>
+          <p>Direct representation across damages, lease, unjust-enrichment, and criminal-complaint matters</p>
+        </div>
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>Corporate &amp; Fair Trade</h3>
+          <p>Contract review and advisory, franchise/distribution disputes, compliance and operating standards</p>
+        </div>
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>IT &amp; Fintech</h3>
+          <p>Platform, payment, and licensing contract review (Korean/English) and investment advisory</p>
+        </div>
+        <div class="practice-card">
+          <h3><span class="tag-dot"></span>IP &amp; Content</h3>
+          <p>Content-supply contract review, copyright advisory, and overseas infringement response</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">AI &amp; Technology</h2>
+      <p class="about-text">
+        Practical, day-to-day use of LLM-based legal AI tools (ChatGPT, Claude, LBox AI, and others),
+        with hands-on experience learning and applying internet-infrastructure technologies
+        (CDN, DNS, WHOIS, SSL) to legal analysis during an overseas copyright-infringement survey.
+      </p>
+    </section>
+
+    <footer class="cv-footer">
+      <span>MIN, Sooji · sooji.min.us@gmail.com</span>
+      <span>Last updated: June 2026</span>
+    </footer>
+
+  </div>
+</div>
+
+<script>
+(function () {
+  var STORAGE_KEY = 'cv-lang';
+  var toggleBtn = document.getElementById('langToggle');
+  var contents = {
+    ko: document.getElementById('content-ko'),
+    en: document.getElementById('content-en')
+  };
+  var labels = { ko: 'EN', en: '한국어' };
+  var ariaLabels = { ko: 'Switch to English', en: '한국어로 전환' };
+
+  function setLang(lang) {
+    contents.ko.classList.toggle('active', lang === 'ko');
+    contents.en.classList.toggle('active', lang === 'en');
+    toggleBtn.textContent = labels[lang];
+    toggleBtn.setAttribute('aria-label', ariaLabels[lang]);
+    document.documentElement.setAttribute('lang', lang);
+    try { localStorage.setItem(STORAGE_KEY, lang); } catch (e) {}
+  }
+
+  var saved = null;
+  try { saved = localStorage.getItem(STORAGE_KEY); } catch (e) {}
+  setLang(saved === 'en' ? 'en' : 'ko');
+
+  toggleBtn.addEventListener('click', function () {
+    var current = contents.en.classList.contains('active') ? 'en' : 'ko';
+    setLang(current === 'ko' ? 'en' : 'ko');
+  });
+})();
+</script>
+
+</body>
+</html>
